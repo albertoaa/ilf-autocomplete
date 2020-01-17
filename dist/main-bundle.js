@@ -32831,13 +32831,17 @@
 	    var _this = _possibleConstructorReturn(this, (Autocomplete.__proto__ || Object.getPrototypeOf(Autocomplete)).call(this, props));
 
 	    _this.onChange = function (ev) {
-	      _this.props.searchState(ev.currentTarget.value);
+	      if (ev.currentTarget.value.length >= 2) {
+	        _this.props.searchState(ev.currentTarget.value);
 
-	      _this.setState({
-	        activeState: 0,
-	        showStates: true,
-	        userInput: ev.currentTarget.value
-	      });
+	        _this.setState({
+	          activeState: 0,
+	          showStates: true,
+	          userInput: ev.currentTarget.value
+	        });
+	      } else {
+	        _this.setState({ userInput: ev.currentTarget.value });
+	      }
 	    };
 
 	    _this.onClick = function (ev) {
@@ -32850,12 +32854,11 @@
 	    };
 
 	    _this.onKeyDown = function (ev) {
-	      var _this$state = _this.state,
-	          activeState = _this$state.activeState,
-	          filteredStates = _this$state.filteredStates;
+	      var activeState = _this.state.activeState;
+
+	      var filteredStates = _this.props.states;
 
 	      // Managing Enter key
-
 	      if (ev.keyCode === 13) {
 	        _this.setState({
 	          activeState: 0,
@@ -32868,13 +32871,23 @@
 	          if (activeState === 0) {
 	            return;
 	          }
-	          _this.setState({ activeState: activeState - 1 });
+	          _this.setState({
+	            activeState: activeState - 1,
+	            userInput: filteredStates[activeState - 1]
+	          });
 	        } else if (ev.keyCode === 40) {
 	          if (activeState - 1 === filteredStates.length) {
 	            return;
 	          }
-	          _this.setState({ activeState: activeState + 1 });
+	          _this.setState({
+	            activeState: activeState + 1,
+	            userInput: filteredStates[activeState + 1]
+	          });
 	        }
+	    };
+
+	    _this.clearSearch = function () {
+	      _this.setState({ userInput: '' });
 	    };
 
 	    _this.state = {
@@ -32888,6 +32901,8 @@
 	  _createClass(Autocomplete, [{
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var onChange = this.onChange,
 	          onClick = this.onClick,
 	          onKeyDown = this.onKeyDown,
@@ -32899,7 +32914,7 @@
 
 	      var statesListComponent = void 0;
 
-	      if (showStates && userInput.length >= 2) {
+	      if (showStates) {
 	        if (this.props.states.length) {
 	          statesListComponent = _react2.default.createElement(
 	            'ul',
@@ -32933,7 +32948,24 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement('input', { type: 'text', onChange: onChange, onKeyDown: onKeyDown, value: userInput }),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'container' },
+	          _react2.default.createElement('input', {
+	            type: 'text',
+	            onChange: onChange,
+	            onKeyDown: onKeyDown,
+	            value: userInput,
+	            placeholder: 'Write the State name'
+	          }),
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', onClick: function onClick() {
+	                return _this2.setState({ userInput: '', showStates: false });
+	              } },
+	            'x'
+	          )
+	        ),
 	        statesListComponent
 	      );
 	    }
@@ -33078,7 +33110,7 @@
 
 
 	// module
-	exports.push([module.id, "body,\nhtml {\n  font-weight: normal;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  padding: 30px; }\n\ninput {\n  border: 1px solid #999;\n  padding: 0.5rem;\n  width: 300px; }\n\n.no-states {\n  color: #999;\n  padding: 0.5rem; }\n\n.states {\n  border: 1px solid #999;\n  border-top-width: 0;\n  list-style: none;\n  margin-top: 0;\n  max-height: 143px;\n  overflow-y: auto;\n  padding-left: 0;\n  width: calc(300px + 1rem); }\n  .states li {\n    padding: 0.5rem; }\n\n.state-active {\n  background-color: #008f68;\n  color: #fae042;\n  cursor: pointer;\n  font-weight: 700; }\n\n.states li:hover {\n  background-color: #008f68;\n  color: #fae042;\n  cursor: pointer;\n  font-weight: 700; }\n\n.states li:not(:last-of-type) {\n  border-bottom: 1px solid #999; }\n", ""]);
+	exports.push([module.id, "body,\nhtml {\n  font-weight: normal;\n  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  padding: 30px; }\n\n.container {\n  border: 1px solid #999;\n  border-radius: 10px;\n  width: 340px; }\n  .container a {\n    border-radius: 20px;\n    color: #000;\n    background-color: #cccccc;\n    padding: 2px 8px;\n    padding-bottom: 4px;\n    position: relative;\n    right: -2px;\n    top: -1px;\n    text-decoration: none;\n    vertical-align: middle;\n    font-weight: 600; }\n\ninput {\n  border: none;\n  outline: none;\n  border-radius: 10px;\n  padding: 0.7rem 0 0.7rem 0.7rem;\n  width: 300px; }\n\n.no-states {\n  color: #999;\n  padding: 0.5rem; }\n\n.states {\n  border: 1px solid #999;\n  border-top-width: 0;\n  list-style: none;\n  margin-top: 0;\n  max-height: 165px;\n  overflow-y: auto;\n  padding-left: 0;\n  width: calc(340px);\n  border-radius: 10px; }\n  .states li {\n    padding: 0.5rem; }\n\n.state-active {\n  background-color: #7cdefb;\n  color: #000;\n  cursor: pointer;\n  font-weight: 700; }\n\n.states li:hover {\n  background-color: #7cdefb;\n  color: #fff;\n  cursor: pointer;\n  font-weight: 700; }\n", ""]);
 
 	// exports
 

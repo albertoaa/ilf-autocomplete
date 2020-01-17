@@ -5,9 +5,30 @@ html {
   padding: 30px;
 }
 
-input {
+.container {
   border: 1px solid #999;
-  padding: 0.5rem;
+  border-radius: 10px;
+  width: 340px;
+
+  a {
+    border-radius: 20px;
+    color: #000;
+    background-color: #cccccc;
+    padding: 2px 8px;
+    padding-bottom: 4px;
+    position: relative;
+    right: -2px;
+    top: -1px;
+    text-decoration: none;
+    vertical-align: middle;
+    font-weight: 600;
+  }
+}
+input {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 0.7rem 0 0.7rem 0.7rem;
   width: 300px;
 }
 
@@ -21,10 +42,11 @@ input {
   border-top-width: 0;
   list-style: none;
   margin-top: 0;
-  max-height: 143px;
+  max-height: 165px;
   overflow-y: auto;
   padding-left: 0;
-  width: calc(300px + 1rem);
+  width: calc(340px);
+  border-radius: 10px;
 
   li {
     padding: 0.5rem;
@@ -32,21 +54,17 @@ input {
 }
 
 .state-active {
-  background-color: #008f68;
-  color: #fae042;
+  background-color: #7cdefb;
+  color: #000;
   cursor: pointer;
   font-weight: 700;
 }
 
 .states li {
   &:hover {
-    background-color: #008f68;
-    color: #fae042;
+    background-color: #7cdefb;
+    color: #fff;
     cursor: pointer;
     font-weight: 700;
-  }
-
-  &:not(:last-of-type) {
-    border-bottom: 1px solid #999;
   }
 }

@@ -23,13 +23,17 @@ class Autocomplete extends Component {
   }
 
   onChange = ev => {
-    this.props.searchState(ev.currentTarget.value);
+    if (ev.currentTarget.value.length >= 2) {
+      this.props.searchState(ev.currentTarget.value);
 
-    this.setState({
-      activeState: 0,
-      showStates: true,
-      userInput: ev.currentTarget.value
-    });
+      this.setState({
+        activeState: 0,
+        showStates: true,
+        userInput: ev.currentTarget.value
+      });
+    } else {
+      this.setState({ userInput: ev.currentTarget.value });
+    }
   };
 
   onClick = ev => {
@@ -42,7 +46,8 @@ class Autocomplete extends Component {
   };
 
   onKeyDown = ev => {
-    const { activeState, filteredStates } = this.state;
+    const { activeState } = this.state;
+    const filteredStates = this.props.states;
 
     // Managing Enter key
     if (ev.keyCode === 13) {
@@ -57,13 +62,23 @@ class Autocomplete extends Component {
       if (activeState === 0) {
         return;
       }
-      this.setState({ activeState: activeState - 1 });
+      this.setState({
+        activeState: activeState - 1,
+        userInput: filteredStates[activeState - 1]
+      });
     } else if (ev.keyCode === 40) {
       if (activeState - 1 === filteredStates.length) {
         return;
       }
-      this.setState({ activeState: activeState + 1 });
+      this.setState({
+        activeState: activeState + 1,
+        userInput: filteredStates[activeState + 1]
+      });
     }
+  };
+
+  clearSearch = () => {
+    this.setState({ userInput: '' });
   };
 
   render() {
@@ -76,7 +91,7 @@ class Autocomplete extends Component {
 
     let statesListComponent;
 
-    if (showStates && userInput.length >= 2) {
+    if (showStates) {
       if (this.props.states.length) {
         statesListComponent = (
           <ul className="states">
@@ -105,7 +120,18 @@ class Autocomplete extends Component {
 
     return (
       <div>
-        <input type="text" onChange={onChange} onKeyDown={onKeyDown} value={userInput} />
+        <div className="container">
+          <input
+            type="text"
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            value={userInput}
+            placeholder="Write the State name"
+          />
+          <a href="#" onClick={() => this.setState({ userInput: '', showStates: false })}>
+            x
+          </a>
+        </div>
         {statesListComponent}
       </div>
     );
