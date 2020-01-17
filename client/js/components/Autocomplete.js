@@ -5,7 +5,8 @@ import '../../sass/autocomplete.scss';
 
 class Autocomplete extends Component {
   static PropTypes = {
-    states: PropTypes.instanceOf(Array)
+    states: PropTypes.instanceOf(Array),
+    searchState: PropTypes.instanceOf(Function)
   };
 
   static defaultProps = {
@@ -16,24 +17,16 @@ class Autocomplete extends Component {
     super(props);
     this.state = {
       activeState: 0,
-      filteredStates: [],
       showStates: false,
       userInput: ''
     };
   }
 
   onChange = ev => {
-    const { states } = this.props;
-
-    const userInput = ev.currentTarget.value;
-
-    const filteredStates = states.filter(
-      state => state.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
+    this.props.searchState(ev.currentTarget.value);
 
     this.setState({
       activeState: 0,
-      filteredStates,
       showStates: true,
       userInput: ev.currentTarget.value
     });
@@ -78,16 +71,16 @@ class Autocomplete extends Component {
       onChange,
       onClick,
       onKeyDown,
-      state: { activeState, filteredStates, showStates, userInput }
+      state: { activeState, showStates, userInput }
     } = this;
 
     let statesListComponent;
 
     if (showStates && userInput.length >= 2) {
-      if (filteredStates.length) {
+      if (this.props.states.length) {
         statesListComponent = (
           <ul className="states">
-            {filteredStates.map((state, index) => {
+            {this.props.states.map((state, index) => {
               let className;
               if (index === activeState) {
                 className = 'state-active';
