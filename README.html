@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ILF Javascript Code Test Instructions</title>
+	<style>
+		body{
+			font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			color: black;
+			padding: 0;
+			margin: 0;
+		}
+		h1, h2, h3, h4, h5, h6, p, li, a {
+			font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			font-weight: 200;
+			width: 100%;
+		}
+		@media only screen and (max-width: 600px) {
+			h1, h2, h3, h4, h5, h6, p, li, a, em {
+				max-width: 84%;
+			}
+		}
+		h1 {
+			color: #000;
+		}
+		h3, p, li, a {
+			font-weight: 200;
+			letter-spacing: 1px;
+			box-sizing: border-box;
+		}
+		.holder {
+			width: 600px;
+			max-width: 98%;
+			margin: 50px auto;
+			padding: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class="holder">
+		<h1>ILF Prueba Javascript - React</h1>
+
+		<p> Cree un componente de autocompletar que permita a los usuarios ingresar un término de búsqueda para buscar y seleccionar un estado de EE. UU. </p>
+		<p> Esta es una prueba de funcionalidad, no necesita crear un diseño Pixel Perfect.</p>
+		<p> El propósito de esta prueba es examinar su capacidad para escribir código y estructurar un pequeño componente React. </p>
+		<p> Ya se importó un archivo de css, así como algunos otros archivos necesarios, por lo que está listo para comenzar a escribir su código. </p>
+		<p> <b> client / js </b> y <b> client / sass </b> son los directorios en los que trabajará. </p>
+
+		
+		<h2> Especificaciones funcionales </h2>
+		<p>Ver <b>component-wireframe.pdf</b> para los wireframes de diseño.</p>
+		<ul>
+			<li> Comience a buscar después de ingresar 2 o más caracteres en el campo de entrada </li>
+            <li> Al buscar, debe presionar el punto final de API proporcionado a continuación y devolver los nuevos resultados en la lista </li>
+			<li> Navegue hacia arriba y hacia abajo a través de los resultados con las teclas de flecha: mientras navega, el valor de entrada se actualizará con la etiqueta apropiada </li>
+			<li> Seleccione un resultado presionando "regresar" o haciendo clic con el mouse al pasar sobre un resultado </li>
+			<li> Al seleccionar un resultado, la lista de resultados debería desaparecer </li>
+			<li> Muestra un máximo de 5 elementos en el resultado antes de que el scroll vertical sea visible </li>
+		</ul>
+
+		
+		<h2> Herramientas de compilación necesarias </h2>
+		<ul>
+			<li><a href="https://nodejs.org/en/" target="_blank">Node</a> - >= 6.1.x <=9.x.x</li>
+			<li><a href="http://webpack.github.io/docs/" target="_blank">Webpack</a> - Instalar vía terminal: <b>sudo npm install -g webpack@3.10.0</b></li>
+		</ul>
+
+		<h2>Fameworks y Herramientas requeridas:</h2>
+		<ul>
+			<li><a href="https://facebook.github.io/react/" target="_blank">React</a></li>
+			<li><a href="http://sass-lang.com/" target="_blank">SASS</a></li>
+		</ul>
+
+		
+		<h2> Instrucciones </h2>
+		<ul>
+		<li> Abra la terminal y navegue hasta la raíz del proyecto </li>
+		<li> Ejecutar: <b> npm install </b> </li>
+		<li> Una vez completada la instalación, ejecute: <b>webpack</b> </li>
+		<li> Después de la compilación, abra su navegador y navegue a <b>localhost:3000</b> </li>
+		</ul>
+
+		<p> Cuando realice un cambio en un archivo Javascript o SCSS en la carpeta <b> cliente </b>, se compilará automáticamente, tendrá que actualizar su navegador manualmente para ver el cambio. </p>
+
+		<h2> API </h2>
+		<p><b>localhost:3000/api/states?term=&lt;search term&gt;</b></p>
+	</div>
+</body>
+</html>

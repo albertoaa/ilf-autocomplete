@@ -1,0 +1,52 @@
+body,
+html {
+  font-weight: normal;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 30px;
+}
+
+input {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  width: 300px;
+}
+
+.no-states {
+  color: #999;
+  padding: 0.5rem;
+}
+
+.states {
+  border: 1px solid #999;
+  border-top-width: 0;
+  list-style: none;
+  margin-top: 0;
+  max-height: 143px;
+  overflow-y: auto;
+  padding-left: 0;
+  width: calc(300px + 1rem);
+
+  li {
+    padding: 0.5rem;
+  }
+}
+
+.state-active {
+  background-color: #008f68;
+  color: #fae042;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.states li {
+  &:hover {
+    background-color: #008f68;
+    color: #fae042;
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid #999;
+  }
+}
