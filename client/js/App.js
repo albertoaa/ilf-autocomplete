@@ -10,12 +10,19 @@ import Autocomplete from './components/Autocomplete';
 export default class Application extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      states: []
+    };
   }
+
+  componentDidMount = () => {
+    this.setState({ states: ['Alabama', 'Carolina', 'Florida', 'Washington DC'] });
+  };
 
   render() {
     return (
       <div>
-        <Autocomplete states={['Alabama', 'Carolina', 'Florida', 'Washington DC']} />
+        <Autocomplete states={this.state.states} />
       </div>
     );
   }
