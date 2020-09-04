@@ -22,7 +22,7 @@
 		"sass-loader": "^4.0.2",
 		"css-loader": "~0.25.0",
 		"style-loader": "~0.13.1",
-		"node-sass": "^3.9.3",
+		"node-sass": "^4.13.1",
 		"webpack": "^1.13.1",
 		"webpack-shell-plugin": "~0.4.3"
 	},
